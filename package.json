@@ -9,13 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "lucide-react": "^0.475.0",
-    "next": "15.1.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "recharts": "^2.15.1"
-=======
     "@chakra-ui/react": "^3.13.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -34,7 +27,6 @@
     "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"
->>>>>>> d117898 (Initial commit)
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
