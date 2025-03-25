@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 body {
   background-color: theme("colors.background");
   color: theme("colors.earth");
-  font-family: "Inter", sans-serif; /* Optional: Use a modern font */
+  font-family: "Inter", sans-serif; 
 }
-=======
->>>>>>> d117898 (Initial commit)

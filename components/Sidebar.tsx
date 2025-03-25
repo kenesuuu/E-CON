@@ -1,3 +1,4 @@
+'use client'
 import { FaHome, FaLeaf, FaUsers, FaBullseye, FaCog, FaQuestionCircle } from "react-icons/fa";
 
 export default function Sidebar() {
