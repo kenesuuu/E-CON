@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { FaBell, FaUserCircle } from "react-icons/fa";
 
 export default function Header() {

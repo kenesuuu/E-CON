@@ -23,7 +23,7 @@ export default function EnergyChart() {
   return (
     <Card className="w-[420px] bg-white p-6 rounded-xl shadow-lg w-full">
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-lg font-semibold text-black">Energy Consumption</h2>
+        <h2 className="text-lg font-semibold">Energy Consumption</h2>
         <button className="flex items-center bg-[#7ED957] hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm shadow">
           Room 1 <ChevronDown className="ml-2 h-4 w-4" />
         </button>

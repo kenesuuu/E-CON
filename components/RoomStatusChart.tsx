@@ -12,21 +12,48 @@ const initialRooms = [
 
 export default function RoomStatusChart() {
   const [rooms, setRooms] = useState(initialRooms);
+  const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
 
-  const toggleDevice = (roomIndex: number, device: "lights" | "ac") => {
+  const handleRoomChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = rooms.find((room) => room.room === event.target.value);
+    if (selected) setSelectedRoom(selected);
+  };
+
+  const toggleDevice = (device: "lights" | "ac") => {
     setRooms((prev) =>
-      prev.map((room, i) =>
-        i === roomIndex ? { ...room, [device]: !room[device] } : room
+      prev.map((room) =>
+        room.room === selectedRoom.room ? { ...room, [device]: !room[device] } : room
       )
     );
+    setSelectedRoom((prev) => ({ ...prev, [device]: !prev[device] }));
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md w-full">
-      <h2 className="text-xl font-semibold mb-4 text-[#111]">Room Status Dashboard</h2>
+    <div className="bg-white p-6 rounded-xl shadow-lg w-full">
+      <h2 className="text-xl font-semibold mb-4">Room Status Dashboard</h2>
 
+      {/* Dropdown to Select Room */}
+      <div className="mb-4">
+        <label htmlFor="roomSelect" className="font-medium text-gray-700 mr-2">
+          Select Room:
+        </label>
+        <select
+          id="roomSelect"
+          value={selectedRoom.room}
+          onChange={handleRoomChange}
+          className="border border-gray-300 rounded px-3 py-2"
+        >
+          {rooms.map((room) => (
+            <option key={room.room} value={room.room}>
+              {room.room}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Chart for Selected Room */}
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={rooms} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+        <BarChart data={[selectedRoom]} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
           <XAxis dataKey="room" stroke="#8D8D8D" />
           <YAxis stroke="#8D8D8D" />
           <Tooltip />
@@ -36,28 +63,25 @@ export default function RoomStatusChart() {
         </BarChart>
       </ResponsiveContainer>
 
-      <div className="mt-4">
-        {rooms.map((room, index) => (
-          <div key={room.room} className="flex justify-between items-center border-b py-2">
-            <span className="font-medium text-gray-700">{room.room}</span>
-            <div className="flex items-center gap-4">
-              <span className="text-gray-600">Lights</span>
-              <Switch
-                onChange={() => toggleDevice(index, "lights")}
-                checked={room.lights}
-                onColor="#7ED957"
-                offColor="#9E9E9E"
-              />
-              <span className="text-gray-600">AC</span>
-              <Switch
-                onChange={() => toggleDevice(index, "ac")}
-                checked={room.ac}
-                onColor="#86efac"
-                offColor="#9E9E9E"
-              />
-            </div>
-          </div>
-        ))}
+      {/* Toggle Controls for Selected Room */}
+      <div className="mt-4 flex justify-between items-center border-t pt-4">
+        <span className="font-medium text-gray-700">{selectedRoom.room}</span>
+        <div className="flex items-center gap-4">
+          <span className="text-gray-600">Lights</span>
+          <Switch
+            onChange={() => toggleDevice("lights")}
+            checked={selectedRoom.lights}
+            onColor="#7ED957"
+            offColor="#9E9E9E"
+          />
+          <span className="text-gray-600">AC</span>
+          <Switch
+            onChange={() => toggleDevice("ac")}
+            checked={selectedRoom.ac}
+            onColor="#86efac"
+            offColor="#9E9E9E"
+          />
+        </div>
       </div>
     </div>
   );
